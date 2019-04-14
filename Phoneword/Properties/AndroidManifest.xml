@@ -8,7 +8,11 @@
 	<!-- Needed only if your calling app reads numbers from the `PHONE_STATE`
          intent action. -->
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	<service android:name=".MyConnectionService" android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE">
+    
+    
+    
+	<service android:name=".MainActivity" 
+             android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE">
 		<intent-filter>
 			<action android:name="android.telecom.ConnectionService" />
 		</intent-filter>

@@ -1,3 +1,4 @@
+using System;
 using Android.App;
 using Android.OS;
 using Android.Widget;
@@ -44,10 +45,12 @@ namespace Phoneword
                 // If permission to call is granted
                 if (CheckSelfPermission(CALL_PHONE) == PERMISSION_GRANTED)
                 {
+
+                    var intent = new Intent(Intent.ActionCall);
                     // Create the Uri from phoneNumberInput
-                    Uri uri = Uri.Parse("tel:" + translatedNumber.ToString());
+                    intent.SetData(Uri.Parse("tel:" + translatedNumber));
                     // Start call to the number in input
-                    StartActivity(new Intent(Intent.ACTION_CALL, uri));
+                    StartActivity(intent);
                 }
                 else
                 {
@@ -55,9 +58,9 @@ namespace Phoneword
                     ActivityCompat.requestPermissions(this, new String[] { CALL_PHONE }, REQUEST_PERMISSION);
                 }
 
-                var intent = new Intent(Intent.ActionCall);
-                intent.SetData(Uri.Parse("tel:" + translatedNumber));
-                StartActivity(intent);
+                var intent1 = new Intent(Intent.ActionCall);
+                intent1.SetData(Uri.Parse("tel:" + translatedNumber));
+                StartActivity(intent1);
 
 
 
