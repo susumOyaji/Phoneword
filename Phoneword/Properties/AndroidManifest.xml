@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="2.0" package="Phoneword.Phoneword" android:installLocation="auto" android:versionCode="4">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="23" />
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="21" />
 	<application android:label="Phoneword" android:icon="@drawable/Icon"></application>
 	<uses-permission android:name="android.permission.CALL_PHONE" />
 	<uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
@@ -10,11 +10,22 @@
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
     
     
-    
-	<service android:name=".MainActivity" 
-             android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE">
-		<intent-filter>
-			<action android:name="android.telecom.ConnectionService" />
-		</intent-filter>
-	</service>
+  <activity android:name="OutgoingCallBroadcaster"
+        android:permission="android.permission.CALL_PHONE"
+        android:theme="@android:style/Theme.NoDisplay">
+    <!-- CALL action intent filters, for the various ways of initiating an outgoing call. -->
+    <intent-filter>
+        <action android:name="android.intent.action.CALL" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:scheme="tel" />
+    </intent-filter>
+  </activity>
+  
+	<service android:name="MyConnectionService"
+          android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE">
+      <intent-filter>
+          <action android:name="android.telecom.ConnectionService"/>
+      </intent-filter>
+  </service>
+  
 </manifest>

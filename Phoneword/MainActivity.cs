@@ -2,12 +2,13 @@ using System;
 using Android.App;
 using Android.OS;
 using Android.Widget;
-using Core;
 using Android.Net;//.Uri;
 using Android.Content;
 using Android.Telephony;
 
 using Java.Util;
+using Uri = Android.Net.Uri;
+using Android.Telecom;
 
 namespace Phoneword
 {
@@ -42,27 +43,13 @@ namespace Phoneword
                     translatedPhoneWord.Text = translatedNumber;
                 }
 
-                // If permission to call is granted
-                if (CheckSelfPermission(CALL_PHONE) == PERMISSION_GRANTED)
-                {
+               
 
-                    var intent = new Intent(Intent.ActionCall);
-                    // Create the Uri from phoneNumberInput
-                    intent.SetData(Uri.Parse("tel:" + translatedNumber));
-                    // Start call to the number in input
-                    StartActivity(intent);
-                }
-                else
-                {
-                    // Request permission to call
-                    ActivityCompat.requestPermissions(this, new String[] { CALL_PHONE }, REQUEST_PERMISSION);
-                }
+                var intent = new Intent(Intent.ActionCall);
+                intent.SetData(Uri.Parse("tel:" + translatedNumber));
+                StartActivity(intent);
 
-                var intent1 = new Intent(Intent.ActionCall);
-                intent1.SetData(Uri.Parse("tel:" + translatedNumber));
-                StartActivity(intent1);
-
-
+                //ShowInCallScreen(true);
 
             };
         }
