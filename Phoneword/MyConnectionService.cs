@@ -13,21 +13,31 @@ using Android.Views;
 using Android.Widget;
 using Uri = Android.Net.Uri;
 
+
+
+
 namespace Phoneword
 {
-    class MyConnectionService :ConnectionService
+    class MyConnectionService : ConnectionService
     {
         //private const string TAG = MyConnectionService.class.getName();
 
         //public override int OnStartCommand(Intent intent, int flags, int startId)
         //{
-            //Log.d(TAG, "On Start");
+        //Log.d(TAG, "On Start");
         //    return base.OnStartCommand(intent, flags, startId);
         //}
+        public void PerformDial(String numberString)
+        {
+            if (!numberString.Equals(""))
+            {
+                Uri number = Uri.Parse("tel:" + numberString);
+                Intent dial = new Intent(Intent.ActionCall, number);
+                StartActivity(dial);
+            }
+        }
 
-
-
-
+       
 
         public override Connection OnCreateOutgoingConnection(PhoneAccountHandle connectionManagerPhoneAccount, ConnectionRequest request)
         {
